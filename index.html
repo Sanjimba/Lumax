@@ -1,80 +1,33 @@
 <!doctype html>
-<html lang="pt">
+<html lang="pt-AO">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LUMAX | Corretora de Imóveis e Gestão de Património</title>
-<meta name="description" content="Compra, venda, arrendamento, gestão de património e consultoria imobiliária em Angola.">
-<meta property="og:title" content="LUMAX — Corretora de Imóveis">
-<meta property="og:description" content="Cuidamos dos seus próximos passos.">
+<title>Lumax — Imobiliária em Angola</title>
+<meta name="description" content="Lumax Imobiliária: compra, venda, arrendamento, gestão de património e consultoria imobiliária em Angola.">
+<meta property="og:title" content="Lumax — Imobiliária"><meta property="og:description" content="Cuidamos dos seus próximos passos."><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <header class="header" id="topo">
-  <a class="logo" href="#inicio" aria-label="LUMAX início">LUMAX <small>PLACEHOLDER</small></a>
-  <button class="menu-btn" aria-label="Abrir menu" aria-expanded="false">☰</button>
-  <nav aria-label="Navegação principal">
-    <a href="#inicio">Início</a><a href="#porque">Porquê</a><a href="#servicos">Serviços</a>
-    <a href="#imoveis">Imóveis</a><a href="#sobre">Sobre</a><a href="#contactos">Contactos</a>
-  </nav>
-  <a class="btn btn-gold" data-whatsapp href="#">WhatsApp</a>
+  <a class="brand" href="#inicio" aria-label="Lumax, início"><img src="logo-Photoroom.png" alt="Lumax — Cuidamos dos seus próximos passos."></a>
+  <button class="menu-btn" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <nav aria-label="Navegação principal"><a href="#inicio">Início</a><a href="#servicos">Serviços</a><a href="#imoveis">Imóveis</a><a href="#sobre">Sobre</a><a href="#contactos">Contactos</a></nav>
+  <a class="btn btn-gold header-contact" data-whatsapp href="#contactos">Fale connosco <span aria-hidden="true">↗</span></a>
 </header>
-
 <main>
-<section class="hero" id="inicio">
- <div><p class="eyebrow">LUMAX • ANGOLA</p><h1>Encontre o imóvel certo para viver ou investir.</h1>
- <p class="lead">Cuidamos dos seus próximos passos, ajudando a encontrar soluções imobiliárias com qualidade, conforto e segurança.</p>
- <div class="actions"><a class="btn btn-gold" href="#imoveis">Ver imóveis disponíveis</a><a class="btn btn-outline" data-whatsapp href="#">Falar no WhatsApp</a></div></div>
- <div class="hero-art" aria-label="Ilustração de edifícios e imóveis">⌂<span>▥</span><span>⌂</span></div>
-</section>
-
-<section class="quick" aria-label="Ações rápidas">
- <a href="#agendamento">📅 Agendar visita</a><a data-whatsapp href="#">◉ WhatsApp</a>
- <a id="mapsQuick" target="_blank" rel="noopener">⌖ Como chegar</a><a id="phoneQuick">☎ Ligar agora</a>
-</section>
-
-<section id="porque"><div class="section-head"><p class="eyebrow">CONFIANÇA</p><h2>Porquê escolher a LUMAX?</h2></div>
-<div class="grid four">
- <article class="card"><h3>Atendimento personalizado</h3><p>Acompanhamento atento às necessidades e objetivos de cada cliente.</p></article>
- <article class="card"><h3>Imóveis verificados</h3><p>Informação organizada para facilitar uma escolha mais segura e consciente.</p></article>
- <article class="card"><h3>Acompanhamento</h3><p>Apoio durante as diferentes etapas da compra, venda ou arrendamento.</p></article>
- <article class="card"><h3>Segurança no processo</h3><p>Orientação e comunicação clara durante a transação. Consulte-nos para detalhes.</p></article>
-</div></section>
-
-<section id="servicos" class="alt"><div class="section-head"><p class="eyebrow">SOLUÇÕES</p><h2>Os nossos serviços</h2></div><div class="grid" id="servicesGrid"></div></section>
-
-<section id="imoveis"><div class="section-head split"><div><p class="eyebrow">OPORTUNIDADES</p><h2>Imóveis em destaque</h2></div><p>Os imóveis apresentados podem ser atualizados pelo painel administrativo.</p></div><div class="grid properties" id="propertiesGrid"></div></section>
-
-<section class="valuation"><div><p class="eyebrow">TEM UM IMÓVEL?</p><h2>Peça uma avaliação do seu imóvel</h2><p>Fale connosco para conhecer as possibilidades de venda, arrendamento ou gestão do seu património.</p></div><a class="btn btn-gold" data-whatsapp data-message="Olá, gostaria de pedir uma avaliação/proposta para o meu imóvel." href="#">Pedir avaliação</a></section>
-
-<section id="agendamento" class="alt"><div class="section-head"><p class="eyebrow">VISITA</p><h2>Agendar visita</h2></div>
-<form id="bookingForm" class="form">
-<label>Nome<input required name="nome" autocomplete="name"></label>
-<label>Telefone<input required name="telefone" type="tel" autocomplete="tel"></label>
-<label>Imóvel de interesse<input name="imovel"></label>
-<label>Data e horário preferido<input name="data" type="datetime-local"></label>
-<label class="full">Mensagem<textarea name="mensagem" rows="4"></textarea></label>
-<button class="btn btn-gold" type="submit">Abrir no WhatsApp</button></form></section>
-
-<section id="publicacoes"><div class="section-head"><p class="eyebrow">ATUALIZAÇÕES</p><h2>Publicações</h2></div>
-<div class="filters" id="postFilters"><button data-filter="Todos" class="active">Todos</button><button data-filter="Venda">Venda</button><button data-filter="Arrendamento">Arrendamento</button><button data-filter="Dicas">Dicas</button><button data-filter="Novidades">Novidades</button></div><div class="grid" id="postsGrid"></div></section>
-
-<section id="galeria" class="alt"><div class="section-head"><p class="eyebrow">ESPAÇOS</p><h2>Galeria</h2></div><div class="gallery" id="galleryGrid"></div></section>
-
-<section id="sobre"><div class="about"><div><p class="eyebrow">SOBRE A LUMAX</p><h2>Imóveis e gestão de património com foco no próximo passo.</h2></div><p>A LUMAX atua no ramo da corretagem de imóveis e gestão de património, prestando apoio em processos de compra, venda, arrendamento e consultoria imobiliária. A empresa atua no Namibe e em outras áreas indicadas nos seus contactos. Para informações específicas sobre disponibilidade e condições, consulte diretamente a LUMAX.</p></div></section>
-
-<section id="localizacao" class="alt"><div class="section-head"><p class="eyebrow">LOCALIZAÇÃO</p><h2>Região de atuação</h2></div>
-<div class="map-wrap"><iframe title="Mapa do Namibe, Angola" src="https://www.google.com/maps?q=Namibe%2C%20Angola&output=embed" loading="lazy"></iframe></div>
-<p><a class="btn btn-outline dark" id="mapsLink" target="_blank" rel="noopener">Abrir no Google Maps</a></p></section>
-
-<section id="contactos"><div class="section-head"><p class="eyebrow">FALE CONNOSCO</p><h2>Contactos e disponibilidade</h2></div>
-<div class="grid three contact-grid"><article class="card"><h3>Telefone e WhatsApp</h3><p id="contactPhone"></p></article><article class="card"><h3>Email</h3><p id="contactEmail"></p></article><article class="card"><h3>Área de atuação</h3><p id="contactAddress"></p><p class="muted">Consulte-nos para confirmar disponibilidade e horários.</p></article></div></section>
-
-<section id="faq" class="alt"><div class="section-head"><p class="eyebrow">DÚVIDAS</p><h2>Perguntas frequentes</h2></div><div class="faq" id="faqList"></div></section>
+<section class="hero" id="inicio"><div class="hero-copy"><p class="eyebrow">IMOBILIÁRIA · ANGOLA</p><h1>O seu próximo passo começa num lugar certo.</h1><p class="lead">Na Lumax, acompanhamos cada decisão imobiliária com proximidade, clareza e atenção ao que realmente importa.</p><div class="actions"><a class="btn btn-gold" href="#imoveis">Ver imóveis</a><a class="btn btn-light" href="#contactos">Fale connosco</a></div></div><div class="hero-image" role="img" aria-label="Fachada de uma moradia moderna ao entardecer"></div></section>
+<section class="quick" aria-label="Ações rápidas"><a href="#agendamento"><span>01</span> Agendar visita</a><a data-whatsapp href="#contactos"><span>02</span> WhatsApp</a><a id="mapsQuick" target="_blank" rel="noopener"><span>03</span> Como chegar</a><a id="phoneQuick"><span>04</span> Ligar agora</a></section>
+<section id="porque"><div class="section-head"><p class="eyebrow">A FORMA LUMAX</p><h2>Confiança para decidir com tranquilidade.</h2><p>Uma abordagem próxima e profissional para que cada processo tenha um caminho mais claro.</p></div><div class="grid four"><article class="card feature"><span class="number">01</span><h3>Escuta atenta</h3><p>Começamos por compreender as suas necessidades, prioridades e objetivos.</p></article><article class="card feature"><span class="number">02</span><h3>Informação clara</h3><p>Orientação direta para apoiar escolhas mais informadas em cada etapa.</p></article><article class="card feature"><span class="number">03</span><h3>Acompanhamento</h3><p>Presença próxima desde a procura até à concretização do seu próximo passo.</p></article><article class="card feature"><span class="number">04</span><h3>Relação de confiança</h3><p>Uma experiência imobiliária feita com rigor, discrição e transparência.</p></article></div></section>
+<section id="servicos" class="alt"><div class="section-head"><p class="eyebrow">SOLUÇÕES IMOBILIÁRIAS</p><h2>Serviços pensados para si.</h2></div><div class="grid services" id="servicesGrid"></div></section>
+<section id="imoveis"><div class="section-head split"><div><p class="eyebrow">SELEÇÃO LUMAX</p><h2>Imóveis em destaque.</h2></div><p>Exemplos de apresentação. Confirme connosco a disponibilidade e as condições atuais.</p></div><div class="grid properties" id="propertiesGrid"></div></section>
+<section class="valuation"><div><p class="eyebrow">TEM UM IMÓVEL?</p><h2>O seu património merece um plano à medida.</h2><p>Fale connosco para explorar opções de venda, arrendamento ou gestão.</p></div><a class="btn btn-gold" data-whatsapp data-message="Olá, gostaria de pedir uma avaliação/proposta para o meu imóvel." href="#contactos">Pedir avaliação <span aria-hidden="true">↗</span></a></section>
+<section id="agendamento" class="alt"><div class="section-head"><p class="eyebrow">VISITAS</p><h2>Agende uma conversa.</h2><p>Partilhe a sua preferência e entraremos em contacto pelos canais oficiais assim que confirmados.</p></div><form id="bookingForm" class="form"><label>Nome<input required name="nome" autocomplete="name"></label><label>Telefone<input required name="telefone" type="tel" autocomplete="tel"></label><label>Imóvel de interesse<input name="imovel"></label><label>Data e horário preferido<input name="data" type="datetime-local"></label><label class="full">Mensagem<textarea name="mensagem" rows="4"></textarea></label><button class="btn btn-gold" type="submit">Preparar mensagem</button></form></section>
+<section id="sobre"><div class="about"><div><p class="eyebrow">SOBRE A LUMAX</p><h2>Cuidamos dos seus próximos passos.</h2></div><div><p>A Lumax é uma imobiliária dedicada a apoiar processos de compra, venda, arrendamento, gestão de património e consultoria imobiliária.</p><p>A nossa missão e história detalhadas estão <strong>[a confirmar]</strong>. Enquanto isso, pode falar connosco para conhecer as soluções adequadas ao seu caso.</p><a href="#contactos" class="text-link">Conhecer a Lumax <span>→</span></a></div></div></section>
+<section id="localizacao" class="alt"><div class="section-head"><p class="eyebrow">ONDE ESTAMOS</p><h2>Área de atuação <span class="confirm">[a confirmar]</span>.</h2></div><div class="map-placeholder"><div><p class="eyebrow">LUMAX IMOBILIÁRIA</p><p>A localização do escritório será disponibilizada em breve.</p><a class="btn btn-outline dark" id="mapsLink" target="_blank" rel="noopener">Abrir no Google Maps</a></div></div></section>
+<section id="contactos"><div class="section-head"><p class="eyebrow">FALE CONNOSCO</p><h2>Estamos prontos para o ouvir.</h2></div><div class="grid three contact-grid"><article class="card"><p class="contact-label">TELEFONE &amp; WHATSAPP</p><h3 id="contactPhone"></h3><p class="muted">Contacto <span class="confirm">[a confirmar]</span></p></article><article class="card"><p class="contact-label">EMAIL</p><h3 id="contactEmail"></h3><p class="muted">Email <span class="confirm">[a confirmar]</span></p></article><article class="card"><p class="contact-label">ESCRITÓRIO</p><h3 id="contactAddress"></h3><p class="muted">Morada e horário <span class="confirm">[a confirmar]</span></p></article></div><div class="social-line"><span>Siga a Lumax</span><a id="facebookLink" target="_blank" rel="noopener">Facebook <span>↗</span></a></div></section>
+<section id="faq" class="alt"><div class="section-head"><p class="eyebrow">DÚVIDAS FREQUENTES</p><h2>Como podemos ajudar?</h2></div><div class="faq" id="faqList"></div></section>
 </main>
-
-<footer><div><a class="logo" href="#inicio">LUMAX</a><p>Cuidamos dos seus próximos passos.</p></div><div><h3>Links rápidos</h3><a href="#imoveis">Imóveis</a><a href="#servicos">Serviços</a><a href="#contactos">Contactos</a></div><div><h3>Informações</h3><button class="text-btn" data-modal="privacy">Política de Privacidade</button><button class="text-btn" data-modal="terms">Termos de Uso</button><a id="facebookLink" target="_blank" rel="noopener">Facebook</a></div></footer>
-
-<a class="floating-wa" data-whatsapp href="#" aria-label="Falar no WhatsApp">◉</a>
-<div class="modal" id="modal" aria-hidden="true"><div class="modal-box"><button class="close" aria-label="Fechar">×</button><div id="modalContent"></div></div></div>
-<script src="js/main.js"></script>
-</body></html>
+<footer><div><a class="brand brand-footer" href="#inicio"><img src="logo-Photoroom.png" alt="Lumax"></a><p>Cuidamos dos seus próximos passos.</p></div><div><h3>Explorar</h3><a href="#imoveis">Imóveis</a><a href="#servicos">Serviços</a><a href="#sobre">Sobre nós</a></div><div><h3>Informações</h3><a href="#contactos">Contactos</a><a id="footerFacebook" target="_blank" rel="noopener">Facebook</a><button class="text-btn" data-modal="privacy">Privacidade</button></div></footer>
+<a class="floating-wa" data-whatsapp href="#contactos" aria-label="Falar com a Lumax pelo WhatsApp"><span>◔</span><b>WhatsApp</b></a><div class="modal" id="modal" aria-hidden="true"><div class="modal-box"><button class="close" aria-label="Fechar">×</button><div id="modalContent"></div></div></div>
+<script src="js/main.js"></script></body></html>
