@@ -1,5 +1,5 @@
 const defaults={
- settings:{phone:"[a confirmar]",whatsapp:"",email:"[a confirmar]",address:"[a confirmar]",facebook:"https://www.facebook.com/profile.php?id=61591040086745"},
+ settings:{phone:"927729874",whatsapp:"927729874",email:"mplumax1@gmail.com",address:"Bairro Valodia, Moçâmedes, Província do Namibe, Angola",facebook:"https://www.facebook.com/profile.php?id=61591040086745"},
  services:[
   {title:"Compra",desc:"Apoio na procura e na tomada de decisão para encontrar o imóvel certo para si."},
   {title:"Venda",desc:"Acompanhamento na apresentação e divulgação do seu imóvel com uma comunicação cuidada."},
