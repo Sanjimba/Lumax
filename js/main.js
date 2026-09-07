@@ -21,7 +21,7 @@ function waLink(message="Olá, gostaria de obter mais informações sobre a Luma
 document.querySelectorAll("[data-whatsapp]").forEach(link=>{link.href=waLink(link.dataset.message);if(validWhatsApp){link.target="_blank";link.rel="noopener"}else link.title="Número de WhatsApp [a confirmar]"});
 const phoneDigits=String(s.phone).replace(/\D/g,"");
 const phoneQuick=document.getElementById("phoneQuick");phoneQuick.href=phoneDigits.length>=8?`tel:${phoneDigits}`:"#contactos";phoneQuick.title=phoneDigits.length>=8?"Ligar para a Lumax":"Telefone [a confirmar]";
-const locationQuery=s.address.includes("[a confirmar]")?"Angola":s.address;
+const locationQuery="Bairro Valodia, Moçâmedes, Província do Namibe, Angola";
 ["mapsQuick","mapsLink"].forEach(id=>document.getElementById(id).href=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationQuery)}`);
 function linkOrText(value,type){if(value.includes("[a confirmar]"))return value;return `<a href="${type}:${type==="tel"?value.replace(/\D/g,""):value}">${value}</a>`}
 document.getElementById("contactPhone").innerHTML=linkOrText(s.phone,"tel");
