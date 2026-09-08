@@ -5,8 +5,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "test": "node --check server.js && node --check js/main.js && node --check js/admin.js",
-    "create-admin": "node scripts/create-admin.js"
+    "test": "node --check server.js && node --check js/main.js && node --check js/admin.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

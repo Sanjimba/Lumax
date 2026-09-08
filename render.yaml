@@ -9,7 +9,3 @@ services:
         value: 20
       - key: JWT_SECRET
         generateValue: true
-      - key: ADMIN_USER
-        sync: false
-      - key: ADMIN_PASSWORD_HASH
-        sync: false
