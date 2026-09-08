@@ -9,12 +9,23 @@ const multer = require("multer");
 const { Low } = require("lowdb");
 const { JSONFile } = require("lowdb/node");
 
+const envFile = path.join(__dirname, ".env");
+if (fs.existsSync(envFile)) {
+  for (const line of fs.readFileSync(envFile, "utf8").split(/\r?\n/)) {
+    const match = line.match(/^([A-Z0-9_]+)=(.*)$/);
+    if (match && process.env[match[1]] === undefined) process.env[match[1]] = match[2];
+  }
+}
+
 const PORT = process.env.PORT || 3000;
 const COOKIE = "lumax_admin";
 const JWT_SECRET = process.env.JWT_SECRET;
 const ADMIN_USER = process.env.ADMIN_USER;
 const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH;
-if (!JWT_SECRET) throw new Error("JWT_SECRET is required.");
+if (!JWT_SECRET) throw new Error("JWT_SECRET is required. Defina JWT_SECRET com um valor aleatório longo antes de iniciar o servidor.");
+if (!ADMIN_USER || !ADMIN_PASSWORD_HASH) {
+  console.error("ADMINISTRADOR NÃO CONFIGURADO: defina ADMIN_USER e ADMIN_PASSWORD_HASH no Render. Consulte README.md ou execute npm run create-admin localmente para gerar as variáveis de forma segura.");
+}
 const root = __dirname;
 const uploads = path.join(root, "uploads");
 fs.mkdirSync(uploads, { recursive: true });
@@ -37,8 +48,14 @@ const seed = {
   sessions: []
 };
 const db = new Low(new JSONFile(path.join(root, "data.json")), seed);
-const ready = db.read().then(() => { db.data ||= structuredClone(seed); for (const key of Object.keys(seed)) db.data[key] ||= structuredClone(seed[key]); return db.write(); });
 const collections = ["trust_steps", "services", "properties", "posts", "gallery", "faq"];
+const ready = db.read().then(() => {
+  db.data ||= structuredClone(seed);
+  db.data.settings = { ...structuredClone(seed.settings), ...(db.data.settings || {}) };
+  for (const key of collections) if (!Array.isArray(db.data[key])) db.data[key] = structuredClone(seed[key]);
+  db.data.sessions = Array.isArray(db.data.sessions) ? db.data.sessions : [];
+  return db.write();
+});
 const app = express();
 app.use(express.json()); app.use(cookieParser()); app.use("/uploads", express.static(uploads)); app.use(express.static(root));
 const write = async () => { await db.write(); };
