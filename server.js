@@ -46,13 +46,19 @@ const seed = {
 };
 const db = new Low(new JSONFile(path.join(root, "data.json")), seed);
 const collections = ["trust_steps", "services", "properties", "posts", "gallery", "faq"];
-const ready = db.read().then(() => {
+const ready = db.read().then(async () => {
   db.data ||= structuredClone(seed);
   db.data.settings = { ...structuredClone(seed.settings), ...(db.data.settings || {}) };
   for (const key of collections) if (!Array.isArray(db.data[key])) db.data[key] = structuredClone(seed[key]);
   db.data.sessions = Array.isArray(db.data.sessions) ? db.data.sessions : [];
   db.data.admins = Array.isArray(db.data.admins) ? db.data.admins : [];
   db.data.passwordResetCodes = Array.isArray(db.data.passwordResetCodes) ? db.data.passwordResetCodes : [];
+  if (!db.data.admins.length) {
+    const username = process.env.DEMO_ADMIN_USER || "admin";
+    const password = process.env.DEMO_ADMIN_PASSWORD || "LumaxDemo2026!";
+    db.data.admins.push({ id: crypto.randomUUID(), username, passwordHash: await bcrypt.hash(password, 12), createdAt: Date.now() });
+    console.warn(`[DEMO LUMAX] Conta de administrador de demonstração criada (utilizador: ${username}). Mude a palavra-passe em "Alterar palavra-passe" assim que entrar.`);
+  }
   return db.write();
 });
 const app = express();
