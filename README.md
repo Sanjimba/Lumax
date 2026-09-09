@@ -31,3 +31,11 @@ Após autenticação existe a opção **Alterar palavra-passe** no menu. Se perd
 Todas as rotas `/api/*` devolvem JSON, incluindo pedidos inválidos, rotas desconhecidas e erros inesperados. O frontend confirma o estado HTTP e o `content-type` antes de interpretar respostas JSON, apresentando mensagens amigáveis ao utilizador.
 
 Depois de iniciar sessão, **Configurações → Importar dados do navegador antigo** recupera conteúdos do `localStorage` no servidor. Execute-o apenas uma vez no navegador/perfil que continha os dados antigos; imagens Base64 antigas são convertidas para ficheiros enviados ao servidor.
+
+## Estrutura e segurança
+
+Os ficheiros enviados ao browser vivem em `public/` (`index.html`, `admin.html`, `css/`, `js/`, logótipo, `robots.txt` e `sitemap.xml`). O Express serve exclusivamente essa pasta; `data.json`, `uploads/`, código do servidor, configuração de deploy e `.env` ficam fora dela. As imagens carregadas são expostas apenas pela rota explícita `/uploads`.
+
+A criação inicial do administrador só é possível enquanto não existir nenhuma conta. **Assim que fizer o deploy, abra `/admin.html` e crie a conta antes de divulgar o site.** A criação fica registada nos logs do serviço para auditoria. Os pedidos de setup, login e recuperação têm um limite de cinco tentativas por IP em cada janela de 10 minutos.
+
+No Render, configure obrigatoriamente um **Persistent Disk** montado no diretório da aplicação (ou numa localização configurada para os dados) antes de depender do serviço em produção. Sem armazenamento persistente, `data.json` e `uploads/` podem ser perdidos num novo deploy ou reinício.

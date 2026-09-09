@@ -30,7 +30,7 @@ const upload = multer({
   fileFilter: (_req, file, done) => done(null, /^image\//.test(file.mimetype))
 });
 const seed = {
-  settings: { phone: "927729874", whatsapp: "927729874", email: "mplumax1@gmail.com", address: "Bairro Valodia, Moçâmedes, Província do Namibe, Angola", facebook: "https://www.facebook.com/profile.php?id=61591040086745", trust_eyebrow: "A FORMA LUMAX", trust_title: "Confiança para decidir com tranquilidade.", trust_subtitle: "Uma abordagem próxima e profissional para que cada processo tenha um caminho mais claro.", services_eyebrow: "SOLUÇÕES IMOBILIÁRIAS", services_title: "Serviços pensados para si.", properties_eyebrow: "SELEÇÃO LUMAX", properties_title: "Imóveis em destaque.", properties_notice: "Exemplos de apresentação. Confirme connosco a disponibilidade e as condições atuais.", faq_eyebrow: "DÚVIDAS FREQUENTES", faq_title: "Como podemos ajudar?" },
+  settings: { phone: "244927729874", whatsapp: "244927729874", email: "mplumax1@gmail.com", address: "Bairro Valodia, Moçâmedes, Província do Namibe, Angola", facebook: "https://www.facebook.com/profile.php?id=61591040086745", trust_eyebrow: "A FORMA LUMAX", trust_title: "Confiança para decidir com tranquilidade.", trust_subtitle: "Uma abordagem próxima e profissional para que cada processo tenha um caminho mais claro.", services_eyebrow: "SOLUÇÕES IMOBILIÁRIAS", services_title: "Serviços pensados para si.", properties_eyebrow: "SELEÇÃO LUMAX", properties_title: "Imóveis em destaque.", properties_notice: "Exemplos de apresentação. Confirme connosco a disponibilidade e as condições atuais.", faq_eyebrow: "DÚVIDAS FREQUENTES", faq_title: "Como podemos ajudar?" },
   trust_steps: [
     { id: "trust-1", order: 1, title: "Escuta atenta", description: "Começamos por compreender as suas necessidades, prioridades e objetivos." },
     { id: "trust-2", order: 2, title: "Informação clara", description: "Orientação direta para apoiar escolhas mais informadas em cada etapa." },
@@ -61,7 +61,7 @@ const jsonError = (res, status, error) => res.status(status).json({ error });
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(uploads));
-app.use(express.static(root));
+app.use(express.static(path.join(root, "public")));
 const write = async () => { await db.write(); };
 const hasAdmins = () => db.data.admins.length > 0;
 const publicCollection = name => asyncRoute(async (_req, res) => { await ready; res.json(db.data[name].sort((a,b) => (a.order ?? 0) - (b.order ?? 0))); });
@@ -69,6 +69,14 @@ app.get("/api/settings", asyncRoute(async (_req,res) => { await ready; res.json(
 collections.forEach(name => app.get(`/api/${name}`, publicCollection(name)));
 async function auth(req,res,next) { try { await ready; const token=req.cookies[COOKIE]; const payload=jwt.verify(token, JWT_SECRET); if (!db.data.sessions.some(s => s.id === payload.jti && s.expires > Date.now())) throw new Error("Session expired"); req.sessionId=payload.jti; next(); } catch { jsonError(res, 401, "Não autorizado."); } }
 app.get("/api/auth/setup-status", asyncRoute(async (_req, res) => { await ready; res.json({ setupRequired: !hasAdmins() }); }));
+const authAttempts = new Map();
+const authLimiter = (req, res, next) => {
+  const now = Date.now(), key = req.ip, windowMs = 10 * 60 * 1000;
+  const attempts = (authAttempts.get(key) || []).filter(time => now - time < windowMs);
+  if (attempts.length >= 5) return jsonError(res, 429, "Demasiadas tentativas. Tente novamente dentro de 10 minutos.");
+  attempts.push(now); authAttempts.set(key, attempts); next();
+};
+app.use(["/api/auth/login", "/api/auth/setup", "/api/auth/recovery/request", "/api/auth/recovery/reset"], authLimiter);
 app.post("/api/auth/setup", asyncRoute(async (req,res) => {
   await ready;
   if (hasAdmins()) return jsonError(res, 409, "Já existe uma conta de administrador.");
@@ -76,7 +84,7 @@ app.post("/api/auth/setup", asyncRoute(async (req,res) => {
   if (!/^[a-zA-Z0-9._-]{3,50}$/.test(username || "")) return jsonError(res, 400, "Indique um utilizador com 3 a 50 caracteres (letras, números, ponto, hífen ou _).");
   if (typeof password !== "string" || password.length < 12) return jsonError(res, 400, "A palavra-passe deve ter pelo menos 12 caracteres.");
   db.data.admins.push({ id: crypto.randomUUID(), username, passwordHash: await bcrypt.hash(password, 12), createdAt: Date.now() });
-  await write(); res.status(201).json({ ok:true, message:"Conta de administrador criada. Já pode iniciar sessão." });
+  await write(); console.info(`[AUDITORIA LUMAX] Administrador criado: ${username} em ${new Date().toISOString()}`); res.status(201).json({ ok:true, message:"Conta de administrador criada. Já pode iniciar sessão." });
 }));
 app.post("/api/auth/login", asyncRoute(async (req,res) => {
   await ready;
